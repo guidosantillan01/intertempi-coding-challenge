@@ -7,6 +7,14 @@ app.get('/', function(req, res) {
   res.send('API');
 });
 
-app.listen(PORT, () => {
+app.post('/signup', function(req, res) {
+  res.send('Signup route');
+});
+
+app.post('/login', function(req, res) {
+  res.send('Login route');
+});
+
+app.listen(PORT, function() {
   console.log(`Listening on port: ${PORT}`);
 });
