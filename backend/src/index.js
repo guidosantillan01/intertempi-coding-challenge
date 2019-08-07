@@ -55,7 +55,8 @@ app.post('/login', async function(req, res) {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) throw new Error('Unable to login');
 
-    res.send({ user });
+    const token = await generateAuthToken(user);
+    res.send({ user, token });
   } catch (e) {
     res.status(400).send({ error: e.message });
   }
