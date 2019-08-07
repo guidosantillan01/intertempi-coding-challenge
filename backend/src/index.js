@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
-const uuidv4 = require('uuid/v4');
+
+require('./db/mongoose');
+const User = require('./models/user');
 
 const app = express();
 const PORT = 3000;
@@ -13,35 +15,28 @@ app.get('/', function(req, res) {
   res.send('API');
 });
 
-const hashPassword = function(password) {
-  return new Promise(function(resolve, reject) {
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(password, salt, function(err, hash) {
-        err ? reject(err) : resolve(hash);
-      });
-    });
-  });
+const hashPassword = async function(password) {
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(password, salt);
+  return hash;
 };
 
-app.post('/signup', function(req, res) {
-  const { email, password } = req.body;
-  const userId = uuidv4();
+app.post('/signup', async function(req, res) {
+  let { email, password } = req.body;
 
   if (!email || !password) {
-    return res
-      .status(422)
-      .send({ error: 'Please provide an email and password' });
+    res.status(422).send({ error: 'Please provide an email and password' });
   }
 
-  const createUser = function(id, email, hashedPassword) {
-    res.status(201).send(`User with id: ${id} created!`);
-  };
+  const hashedPassword = await hashPassword(password);
+  const user = new User({ email, password: hashedPassword });
 
-  hashPassword(password)
-    .then(function(hashedPassword) {
-      createUser(userId, email, hashedPassword);
-    })
-    .catch((err) => res.status(400).send(err));
+  try {
+    await user.save();
+    res.status(201).send({ user, password });
+  } catch (e) {
+    res.status(400).send({ error: 'User was not created. Try again.' });
+  }
 });
 
 app.post('/login', function(req, res) {
