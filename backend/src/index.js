@@ -22,7 +22,7 @@ const hashPassword = async function(password) {
 };
 
 app.post('/signup', async function(req, res) {
-  let { email, password } = req.body;
+  const { email, password } = req.body;
 
   if (!email || !password) {
     res.status(422).send({ error: 'Please provide an email and password' });
@@ -35,12 +35,24 @@ app.post('/signup', async function(req, res) {
     await user.save();
     res.status(201).send({ user, password });
   } catch (e) {
-    res.status(400).send({ error: 'User was not created. Try again.' });
+    res.status(400).send({ error: 'User was not created.' });
   }
 });
 
-app.post('/login', function(req, res) {
-  res.send('Login route');
+app.post('/login', async function(req, res) {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) throw new Error('Unable to login');
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) throw new Error('Unable to login');
+
+    res.send({ user });
+  } catch (e) {
+    res.status(400).send({ error: e.message });
+  }
 });
 
 app.listen(PORT, function() {
