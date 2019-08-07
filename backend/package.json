@@ -16,5 +16,8 @@
     "mongoose": "^5.6.8",
     "nodemon": "^1.19.1",
     "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "env-cmd": "^9.0.3"
   }
 }
