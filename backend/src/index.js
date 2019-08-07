@@ -14,6 +14,12 @@ app.get('/', function(req, res) {
 app.post('/signup', function(req, res) {
   const { email, password } = req.body;
 
+  if (!email || !password) {
+    return res
+      .status(422)
+      .send({ error: 'Please provide an email and password' });
+  }
+
   res.send(`Signup request for user: ${email}`);
 });
 
