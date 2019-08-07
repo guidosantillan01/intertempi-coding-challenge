@@ -11,9 +11,9 @@ function createWindow() {
 
   mainWindow.loadFile('src/index.html');
 
-  // mainWindow.on('closed', function() {
-  //   mainWindow = null;
-  // });
+  mainWindow.on('closed', function() {
+    mainWindow = null;
+  });
 
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
   Menu.setApplicationMenu(mainMenu);
@@ -65,6 +65,30 @@ const mainMenuTemplate = [
 ];
 
 app.on('ready', createWindow);
+
+// Add empty object to menu
+if (process.platform === 'darwin') {
+  mainMenuTemplate.unshift({});
+}
+
+// Add developer tools when development mode
+if (process.env.NODE_ENV !== 'production') {
+  mainMenuTemplate.push({
+    label: 'Developer Tools',
+    submenu: [
+      {
+        label: 'Toggle DevTools',
+        accelerator: process.platform === 'darwin' ? 'Command+I' : 'Ctrl+I',
+        click(item, focusedWindow) {
+          focusedWindow.toggleDevTools();
+        }
+      },
+      {
+        role: 'reload'
+      }
+    ]
+  });
+}
 
 // app.on('window-all-closed', function() {
 //   if (process.platform !== 'darwin') app.quit();
