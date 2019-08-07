@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const uuidv4 = require('uuid/v4');
 
 const app = express();
 const PORT = 3000;
@@ -24,6 +25,7 @@ const hashPassword = function(password) {
 
 app.post('/signup', function(req, res) {
   const { email, password } = req.body;
+  const userId = uuidv4();
 
   if (!email || !password) {
     return res
