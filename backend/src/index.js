@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 require('./db/mongoose');
 const User = require('./models/user');
@@ -21,6 +22,10 @@ const hashPassword = async function(password) {
   return hash;
 };
 
+const generateAuthToken = function(user) {
+  return jwt.sign({ _id: user.id.toString() }, process.env.JWT_SECRET);
+};
+
 app.post('/signup', async function(req, res) {
   const { email, password } = req.body;
 
@@ -33,9 +38,10 @@ app.post('/signup', async function(req, res) {
 
   try {
     await user.save();
-    res.status(201).send({ user, password });
+    const token = await generateAuthToken(user);
+    res.status(201).send({ user, token });
   } catch (e) {
-    res.status(400).send({ error: 'User was not created.' });
+    res.status(400).send({ error: e.errmsg });
   }
 });
 
