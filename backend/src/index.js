@@ -33,13 +33,15 @@ app.post('/signup', function(req, res) {
       .send({ error: 'Please provide an email and password' });
   }
 
+  const createUser = function(id, email, hashedPassword) {
+    res.status(201).send(`User with id: ${id} created!`);
+  };
+
   hashPassword(password)
     .then(function(hashedPassword) {
-      res.send(
-        `Signup request for user: ${email} and password: ${hashedPassword}`
-      );
+      createUser(userId, email, hashedPassword);
     })
-    .catch((err) => res.sendStatus(400));
+    .catch((err) => res.status(400).send(err));
 });
 
 app.post('/login', function(req, res) {
