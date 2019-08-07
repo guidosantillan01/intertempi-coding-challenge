@@ -25,7 +25,9 @@ const hashPassword = async function(password) {
 };
 
 const generateAuthToken = function(user) {
-  return jwt.sign({ _id: user.id.toString() }, process.env.JWT_SECRET);
+  return jwt.sign({ _id: user.id.toString() }, process.env.JWT_SECRET, {
+    expiresIn: '1h'
+  });
 };
 
 app.post('/signup', async function(req, res) {
