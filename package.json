@@ -1,0 +1,12 @@
+{
+  "name": "intertempi-coding-challenge",
+  "version": "1.0.0",
+  "description": "Coding Challenge for intertempi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Guido Santillan",
+  "license": "ISC"
+}
