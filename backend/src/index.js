@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const auth = require('./middleware/auth');
+
 require('./db/mongoose');
 const User = require('./models/user');
 
@@ -60,6 +62,11 @@ app.post('/login', async function(req, res) {
   } catch (e) {
     res.status(400).send({ error: e.message });
   }
+});
+
+app.get('/me', auth, async function(req, res) {
+  const { _id, email } = req.user;
+  res.send({ _id, email });
 });
 
 app.listen(PORT, function() {
