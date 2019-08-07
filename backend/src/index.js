@@ -1,19 +1,6 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-require('./db/mongoose');
+const app = require('./server');
 
-const indexRouter = require('./routes/index');
-const authRouter = require('./routes/auth');
-
-const PORT = 3000;
-const app = express();
-
-// App
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({ type: '*/*' }));
-
-app.use('/', indexRouter);
-app.use('/', authRouter);
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, function() {
   console.log(`Listening on port: ${PORT}`);
