@@ -19,40 +19,10 @@ function createWindow() {
   Menu.setApplicationMenu(mainMenu);
 }
 
-function signupUser() {
-  console.log('Signing up User');
-}
-
-function loginUser() {
-  console.log('Loggin in User');
-}
-
-function logoutUser() {
-  console.log('Loggin out User');
-}
-
 const mainMenuTemplate = [
   {
     label: 'File',
     submenu: [
-      {
-        label: 'Signup',
-        click() {
-          signupUser();
-        }
-      },
-      {
-        label: 'Login',
-        click() {
-          loginUser();
-        }
-      },
-      {
-        label: 'Logout',
-        click() {
-          logoutUser();
-        }
-      },
       {
         label: 'Quit',
         accelerator: process.platform === 'darwin' ? 'Command+Q' : 'Ctrl+Q',
@@ -91,11 +61,3 @@ if (process.env.NODE_ENV !== 'production') {
     ]
   });
 }
-
-// app.on('window-all-closed', function() {
-//   if (process.platform !== 'darwin') app.quit();
-// });
-
-// app.on('activate', function() {
-//   if (mainWindow === null) createWindow();
-// });
