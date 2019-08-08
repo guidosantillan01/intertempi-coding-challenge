@@ -28,13 +28,13 @@
 
 ### Quick Guide
 
-1. Clone this repository
+1. Open a MongoDB instance `mongod`
+
+2. Clone this repository
 
 ```sh
 git clone https://github.com/guidosantillan01/intertempi-coding-challenge
 ```
-
-2. Open a `mongod.exe` instance
 
 3. Go into the BACKEND folder
 
