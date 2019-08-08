@@ -14,13 +14,7 @@
       <a href="signup.html">Create an account</a> to access content.
     </div>
 
-    <div>
-      <p>
-        We are a PropTech start-up from Berlin that transforms temporarily
-        unused commercial space into flexible workspace for creative teams and
-        coworking.
-      </p>
-    </div>
+    <div id="blocked-info"></div>
 
     <script>
       const token = localStorage.getItem('token');
@@ -40,18 +34,24 @@
           .then(handleErrors)
           .then((res) => res.json())
           .then((response) => {
+            document.getElementById('menu').innerHTML =
+              '<ul> <li><a href="index.html" id="logout-button">Log Out</a></li> </ul>';
+
             document.getElementById(
               'blocked-content'
             ).innerText = `User with id ${
               response._id
             } has been authenticated. Your email is: ${response.email}`;
-            document.getElementById('menu').innerHTML +=
-              '<ul> <li><a href="index.html" id="logout-button">Log Out</a></li> </ul>';
-            const logout = document.getElementById('logout-button');
-            logout.addEventListener('click', function() {
-              localStorage.setItem('token', '');
-              location.href('index.html');
-            });
+
+            document.getElementById('blocked-info').innerHTML =
+              '<p> We are a PropTech start - up from Berlin that transforms temporarily unused commercial space into flexible workspace for creative teams andcoworking.</p>';
+
+            document
+              .getElementById('logout-button')
+              .addEventListener('click', function() {
+                localStorage.setItem('token', '');
+                location.href('index.html');
+              });
           })
           .catch((err) => console.log(err));
 
