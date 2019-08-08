@@ -34,7 +34,9 @@
 git clone https://github.com/guidosantillan01/intertempi-coding-challenge
 ```
 
-2. Go into the BACKEND folder
+2. Open a `mongod.exe` instance
+
+3. Go into the BACKEND folder
 
 ```sh
 cd intertempi-coding-challenge/backend
