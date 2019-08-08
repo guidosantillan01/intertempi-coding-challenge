@@ -21,14 +21,12 @@ if (token) {
 
       document.getElementById(
         'blocked-content'
-      ).innerHTML = `<p>User with id <strong>${
-        response._id
-      }</strong> has been authenticated. Your email is: <strong>${
-        response.email
-      }</strong></p>`;
+      ).innerHTML = `<p>Welcome <strong>${
+        response.username
+      }</strong>! You are logged as <strong>${response.email}</strong></p>`;
 
       document.getElementById('blocked-info').innerHTML =
-        '<p>We are a PropTech start - up from Berlin that transforms temporarily unused commercial space into flexible workspace for creative teams and coworking.</p>';
+        '<p class="section">We are a PropTech start - up from Berlin that transforms temporarily unused commercial space into flexible workspace for creative teams and coworking.</p>';
 
       document
         .getElementById('logout-button')

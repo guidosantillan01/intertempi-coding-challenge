@@ -7,8 +7,8 @@ router.get('/', function(req, res) {
 });
 
 router.get('/me', auth, async function(req, res) {
-  const { _id, email } = req.user;
-  res.send({ _id, email });
+  const { _id, email, username } = req.user;
+  res.send({ _id, email, username });
 });
 
 module.exports = router;

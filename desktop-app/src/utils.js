@@ -2,6 +2,14 @@ const handleSubmit = function(e) {
   e.preventDefault();
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
+  const usernameElement = document.getElementById('username');
+  let username;
+
+  if (usernameElement !== null) {
+    username = usernameElement.value;
+  } else {
+    username = null;
+  }
 
   const configuration = {
     method: 'POST',
@@ -10,7 +18,8 @@ const handleSubmit = function(e) {
     },
     body: JSON.stringify({
       email,
-      password
+      password,
+      username
     })
   };
 
