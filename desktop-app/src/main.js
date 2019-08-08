@@ -6,7 +6,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    title: 'Home'
+    title: 'intertempi Desktop App'
   });
 
   mainWindow.loadFile('src/index.html');
@@ -78,13 +78,15 @@ if (process.env.NODE_ENV !== 'production') {
     submenu: [
       {
         label: 'Toggle DevTools',
-        accelerator: process.platform === 'darwin' ? 'Command+I' : 'Ctrl+I',
+        accelerator:
+          process.platform === 'darwin' ? 'Command+Shift+I' : 'Ctrl+Shift+I',
         click(item, focusedWindow) {
           focusedWindow.toggleDevTools();
         }
       },
       {
-        role: 'reload'
+        role: 'reload',
+        accelerator: 'F5'
       }
     ]
   });
