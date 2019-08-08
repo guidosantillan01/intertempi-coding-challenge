@@ -1,4 +1,3 @@
-const form = document.querySelector('form');
 const handleSubmit = function(e) {
   e.preventDefault();
   const email = document.getElementById('email').value;
@@ -14,7 +13,8 @@ const handleSubmit = function(e) {
       password
     })
   };
-  return fetch('http://localhost:3000/login', configuration)
+
+  return fetch(url, configuration)
     .then(handleErrors)
     .then((res) => res.json())
     .then((response) => {
@@ -22,8 +22,7 @@ const handleSubmit = function(e) {
       window.location.href = 'index.html';
     })
     .catch((err) => {
-      document.getElementById('form-message').innerHTML =
-        '<p>Unable to login</p>';
+      document.getElementById('form-message').innerHTML = formMessage;
     });
 };
 
@@ -33,5 +32,3 @@ function handleErrors(response) {
   }
   return response;
 }
-
-form.addEventListener('submit', handleSubmit);

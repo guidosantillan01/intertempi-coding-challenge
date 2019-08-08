@@ -1,5 +1,6 @@
 const token = localStorage.getItem('token');
 const bearer = 'Bearer ' + token;
+
 if (token) {
   const configuration = {
     method: 'GET',
@@ -33,11 +34,4 @@ if (token) {
         });
     })
     .catch((err) => console.log(err));
-
-  function handleErrors(response) {
-    if (!response.ok) {
-      throw Error(response.statusText);
-    }
-    return response;
-  }
 }

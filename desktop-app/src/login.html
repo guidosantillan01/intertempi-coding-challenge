@@ -37,6 +37,12 @@
 
     <div id="form-message"></div>
 
-    <script src="login.js"></script>
+    <script src="utils.js"></script>
+    <script>
+      const url = 'http://localhost:3000/login';
+      const formMessage = '<p>Unable to login</p>';
+
+      document.querySelector('form').addEventListener('submit', handleSubmit);
+    </script>
   </body>
 </html>

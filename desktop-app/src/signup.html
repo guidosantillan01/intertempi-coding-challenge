@@ -37,6 +37,12 @@
 
     <div id="form-message"></div>
 
-    <script src="signup.js"></script>
+    <script src="utils.js"></script>
+    <script>
+      const url = 'http://localhost:3000/signup';
+      const formMessage = '<p>Unable to create an account</p>';
+
+      document.querySelector('form').addEventListener('submit', handleSubmit);
+    </script>
   </body>
 </html>
