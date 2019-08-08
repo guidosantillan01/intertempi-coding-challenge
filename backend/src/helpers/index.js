@@ -2,9 +2,13 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const hashPassword = async function(password) {
-  const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hash(password, salt);
-  return hash;
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+    return hash;
+  } catch (e) {
+    throw new Error(e.message);
+  }
 };
 
 const generateAuthToken = function(user) {
