@@ -19,12 +19,16 @@ if (token) {
       document.getElementById('menu').innerHTML =
         '<ul> <li><a href="index.html" id="logout-button">Log Out</a></li> </ul>';
 
-      document.getElementById('blocked-content').innerText = `User with id ${
+      document.getElementById(
+        'blocked-content'
+      ).innerHTML = `<p>User with id <strong>${
         response._id
-      } has been authenticated. Your email is: ${response.email}`;
+      }</strong> has been authenticated. Your email is: <strong>${
+        response.email
+      }</strong></p>`;
 
       document.getElementById('blocked-info').innerHTML =
-        '<p> We are a PropTech start - up from Berlin that transforms temporarily unused commercial space into flexible workspace for creative teams andcoworking.</p>';
+        '<p>We are a PropTech start - up from Berlin that transforms temporarily unused commercial space into flexible workspace for creative teams and coworking.</p>';
 
       document
         .getElementById('logout-button')

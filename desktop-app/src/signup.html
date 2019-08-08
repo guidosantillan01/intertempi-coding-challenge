@@ -15,27 +15,32 @@
   </head>
 
   <body>
-    <h1>Signup</h1>
-    <nav id="menu">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="login.html">Login</a></li>
-      </ul>
-    </nav>
+    <section class="section">
+      <h1 class="title">Signup</h1>
 
-    <form>
-      <div>
-        <label>Email:</label>
-        <input type="text" id="email" autofocus />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" id="password" />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+      <form>
+        <div class="field">
+          <label class="label">Email:</label>
+          <input class="input" type="text" id="email" autofocus />
+        </div>
+        <div class="field">
+          <label class="label">Password:</label>
+          <input class="input" type="password" id="password" />
+        </div>
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-primary" type="submit">
+              Create Account
+            </button>
+          </div>
+          <div class="control">
+            <a class="button is-text" href="index.html">Cancel</a>
+          </div>
+        </div>
+      </form>
 
-    <div id="form-message"></div>
+      <div class="help is-danger" id="form-message"></div>
+    </section>
 
     <script src="utils.js"></script>
     <script>
